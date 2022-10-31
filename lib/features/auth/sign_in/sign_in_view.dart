@@ -64,9 +64,12 @@ class _SignInViewState extends State<SignInView> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(onPressed: () {}, child: Text('Cadastrar')),
-                    SizedBox(width: 10),
+                    ElevatedButton(style: ElevatedButton.styleFrom(primary: const Color(0xFFF2796B)),
+                        onPressed: () {}, child: const Text('Cadastrar')),
+                    const SizedBox(width: 10),
                     ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: const Color(0xFFF2796B)),
                         onPressed: () {
                           Navigator.pop(context);
                         },

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pii6/features/auth/sign_in/sign_in_view.dart';
 import 'package:pii6/features/splash/splash_view.dart';
-
 import '../features/auth/login/login_view.dart';
+import '../features/new_document/list/list.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -24,6 +24,12 @@ class RouteGenerator {
         {
           return doNavigation(
             page: const SignInView(),
+          );
+        }
+      case '/list':
+        {
+          return doNavigation(
+            page: List(),
           );
         }
       default:
