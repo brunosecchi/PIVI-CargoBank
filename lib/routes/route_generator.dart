@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pii6/features/auth/sign_in/sign_in_view.dart';
+import 'package:pii6/features/new_document/list/add_document/add_document.dart';
 import 'package:pii6/features/splash/splash_view.dart';
 import '../features/auth/login/login_view.dart';
 import '../features/new_document/list/list.dart';
@@ -32,6 +33,13 @@ class RouteGenerator {
             page: List(),
           );
         }
+      case '/add_document':
+        {
+          return doNavigation(
+            page: const AddDocument(),
+          );
+        }
+
       default:
         {
           return doNavigation(

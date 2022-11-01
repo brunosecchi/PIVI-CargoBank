@@ -27,62 +27,65 @@ class _SignInViewState extends State<SignInView> {
           child: Form(
             child: Padding(
               padding: EdgeInsets.all(70.30),
-            key: _formkey,
-            child: Column(
-              children: <Widget>[
-                const Text('Registro',
-                    style:
-                        TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-                TextFormField(
-                  controller: _credentialName,
-                  decoration: const InputDecoration(
-                      label: Text('Nome ou Razão Social')),
-                ),
-                TextFormField(
-                  controller: _credentialController,
-                  decoration: const InputDecoration(label: Text('CPF ou CNPJ')),
-                ),
-                TextFormField(
-                  controller: _credentialMail,
-                  decoration: const InputDecoration(label: Text('E-mail')),
-                ),
-                TextFormField(
-                  controller: _credentialPhone,
-                  decoration: const InputDecoration(label: Text('Telefone')),
-                ),
-                TextFormField(
-                  controller: _credentialSelect,
-                  decoration: const InputDecoration(label: Text('Selecione')),
-                ),
-                TextFormField(
-                  controller: _passwordController,
-                  decoration: const InputDecoration(label: Text('Senha')),
-                ),
-                TextFormField(
-                  controller: _passwordConfirm,
-                  decoration:
-                      const InputDecoration(label: Text('Confirme sua Senha')),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(style: ElevatedButton.styleFrom(primary: const Color(0xFFF2796B)),
-                        onPressed: () {}, child: const Text('Cadastrar')),
-                    const SizedBox(
-                      child: Padding(
-                      padding: EdgeInsets.all(40.0)),
-                      width: 10),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: const Color(0xFFF2796B)),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text('Cancelar')),
-                  ],
-                ),
-              ],
-            ),
+              key: _formkey,
+              child: Column(
+                children: <Widget>[
+                  const Text('Registro',
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                  TextFormField(
+                    controller: _credentialName,
+                    decoration: const InputDecoration(
+                        label: Text('Nome ou Razão Social')),
+                  ),
+                  TextFormField(
+                    controller: _credentialController,
+                    decoration:
+                        const InputDecoration(label: Text('CPF ou CNPJ')),
+                  ),
+                  TextFormField(
+                    controller: _credentialMail,
+                    decoration: const InputDecoration(label: Text('E-mail')),
+                  ),
+                  TextFormField(
+                    controller: _credentialPhone,
+                    decoration: const InputDecoration(label: Text('Telefone')),
+                  ),
+                  TextFormField(
+                    controller: _credentialSelect,
+                    decoration: const InputDecoration(label: Text('Selecione')),
+                  ),
+                  TextFormField(
+                    controller: _passwordController,
+                    decoration: const InputDecoration(label: Text('Senha')),
+                  ),
+                  TextFormField(
+                    controller: _passwordConfirm,
+                    decoration: const InputDecoration(
+                        label: Text('Confirme sua Senha')),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: const Color(0xFFF2796B)),
+                          onPressed: () {},
+                          child: const Text('Cadastrar')),
+                      const SizedBox(
+                          child: Padding(padding: EdgeInsets.all(40.0)),
+                          width: 10),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: const Color(0xFFF2796B)),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('Cancelar')),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
