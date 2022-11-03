@@ -23,28 +23,52 @@ class _ListState extends State<List> {
         child: Container(
           child: Form(
             child: Padding(
-              padding: EdgeInsets.all(70.50),
+              padding: EdgeInsets.all(30.50),
               key: _formkey,
               child: Column(
                 children: <Widget>[
                   const Text('Lista',
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                  const SizedBox(
+                    width: 40,
+                    child: Padding(
+                      padding: EdgeInsets.all(5.0)),
+                  ),
                   TextFormField(
                     controller: _list,
-                    decoration: const InputDecoration(label: Text('')),
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(), label: Text('')),
+                  ),
+                  const SizedBox(
+                    width: 40,
+                    child: Padding(
+                      padding: EdgeInsets.all(5.0)),
                   ),
                   TextFormField(
                     controller: _listOne,
-                    decoration: const InputDecoration(label: Text('')),
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(), label: Text('')),
+                  ),
+                  const SizedBox(
+                    width: 40,
+                    child: Padding(
+                      padding: EdgeInsets.all(5.0)),
                   ),
                   TextFormField(
                     controller: _listTwo,
-                    decoration: const InputDecoration(label: Text('')),
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(), label: Text('')),
+                  ),
+                  const SizedBox(
+                    width: 40,
+                    child: Padding(
+                      padding: EdgeInsets.all(5.0)),
                   ),
                   TextFormField(
                     controller: _listThree,
-                    decoration: const InputDecoration(label: Text('')),
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(), label: Text('')),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -81,7 +105,7 @@ class _ListState extends State<List> {
       title: Image.asset(
         'assets/images/logo.png',
       ),
-      toolbarHeight: size.height * .15,
+      toolbarHeight: size.height * .25,
       backgroundColor: const Color(0xFFF2796B),
       automaticallyImplyLeading: false,
     );
