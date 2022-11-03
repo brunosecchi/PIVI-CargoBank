@@ -19,17 +19,29 @@ class _LoginViewState extends State<LoginView> {
       appBar: _appBar(size),
       body: SingleChildScrollView(
         child: Container(
+          // margin: EdgeInsets.only(ad)
           child: Form(
             child: Padding(
               padding: EdgeInsets.all(75.5),
               key: _formkey,
-              child: Column(
+              child: Column( 
+                
+                
                 children: <Widget>[
                   TextFormField(
+                    
+                    
+                    
                     controller: _credentialController,
                     decoration: const InputDecoration(
+                     
                         border: OutlineInputBorder(),
                         label: Text('CPF ou CNPJ')),
+                  ),
+                  SizedBox(
+                    width: 40,
+                    child: Padding(
+                      padding: EdgeInsets.all(5.0)),
                   ),
                   TextFormField(
                     controller: _passwordController,

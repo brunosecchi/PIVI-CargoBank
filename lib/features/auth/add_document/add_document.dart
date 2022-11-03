@@ -20,7 +20,7 @@ class _AddDocumentState extends State<AddDocument> {
         child: Container(
           child: Form(
             child: Padding(
-              padding: EdgeInsets.all(70.10),
+              padding: EdgeInsets.all(30.10),
               key: _formkey,
               child: Column(
                 children: <Widget>[
@@ -30,7 +30,13 @@ class _AddDocumentState extends State<AddDocument> {
                   TextFormField(
                     controller: _list,
                     decoration:
-                        const InputDecoration(label: Text('Protocolo ou CT-E')),
+                        const InputDecoration(
+                          border: OutlineInputBorder(), label: Text('Protocolo ou CT-E')),
+                  ),
+                  const SizedBox(
+                    width: 40,
+                    child: Padding(
+                      padding: EdgeInsets.all(15.0)),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -23,27 +23,47 @@ class _ListState extends State<List> {
         child: Container(
           child: Form(
             child: Padding(
-              padding: EdgeInsets.all(70.50),
+              padding: EdgeInsets.all(30.50),
               key: _formkey,
               child: Column(
                 children: <Widget>[
                   const Text('Lista',
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                  const SizedBox(
+                    width: 40,
+                    child: Padding(
+                      padding: EdgeInsets.all(5.0)),
+                  ),
                   TextFormField(
                     controller: _list,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(), label: Text('')),
+                  ),
+                  const SizedBox(
+                    width: 40,
+                    child: Padding(
+                      padding: EdgeInsets.all(5.0)),
                   ),
                   TextFormField(
                     controller: _listOne,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(), label: Text('')),
                   ),
+                  const SizedBox(
+                    width: 40,
+                    child: Padding(
+                      padding: EdgeInsets.all(5.0)),
+                  ),
                   TextFormField(
                     controller: _listTwo,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(), label: Text('')),
+                  ),
+                  const SizedBox(
+                    width: 40,
+                    child: Padding(
+                      padding: EdgeInsets.all(5.0)),
                   ),
                   TextFormField(
                     controller: _listThree,
