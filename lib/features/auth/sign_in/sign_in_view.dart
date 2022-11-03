@@ -36,32 +36,39 @@ class _SignInViewState extends State<SignInView> {
                   TextFormField(
                     controller: _credentialName,
                     decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
                         label: Text('Nome ou Razão Social')),
                   ),
                   TextFormField(
                     controller: _credentialController,
-                    decoration:
-                        const InputDecoration(label: Text('CPF ou CNPJ')),
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        label: Text('CPF ou CNPJ')),
                   ),
                   TextFormField(
                     controller: _credentialMail,
-                    decoration: const InputDecoration(label: Text('E-mail')),
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(), label: Text('E-mail')),
                   ),
                   TextFormField(
                     controller: _credentialPhone,
-                    decoration: const InputDecoration(label: Text('Telefone')),
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(), label: Text('Telefone')),
                   ),
                   TextFormField(
                     controller: _credentialSelect,
-                    decoration: const InputDecoration(label: Text('Selecione')),
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(), label: Text('Selecione')),
                   ),
                   TextFormField(
                     controller: _passwordController,
-                    decoration: const InputDecoration(label: Text('Senha')),
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(), label: Text('Senha')),
                   ),
                   TextFormField(
                     controller: _passwordConfirm,
                     decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
                         label: Text('Confirme sua Senha')),
                   ),
                   Row(
@@ -98,7 +105,7 @@ class _SignInViewState extends State<SignInView> {
       title: Image.asset(
         'assets/images/logo.png',
       ),
-      toolbarHeight: size.height * .15,
+      toolbarHeight: size.height * .25,
       backgroundColor: const Color(0xFFF2796B),
       automaticallyImplyLeading: false,
     );

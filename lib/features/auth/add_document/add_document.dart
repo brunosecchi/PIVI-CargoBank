@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 
-class List extends StatefulWidget {
-  const List({Key? key}) : super(key: key);
+class AddDocument extends StatefulWidget {
+  const AddDocument({Key? key}) : super(key: key);
 
   @override
-  State<List> createState() => _ListState();
+  State<AddDocument> createState() => _AddDocumentState();
 }
 
-class _ListState extends State<List> {
+class _AddDocumentState extends State<AddDocument> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   final TextEditingController _list = TextEditingController();
-  final TextEditingController _listOne = TextEditingController();
-  final TextEditingController _listTwo = TextEditingController();
-  final TextEditingController _listThree = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,48 +20,31 @@ class _ListState extends State<List> {
         child: Container(
           child: Form(
             child: Padding(
-              padding: EdgeInsets.all(70.50),
+              padding: EdgeInsets.all(70.10),
               key: _formkey,
               child: Column(
                 children: <Widget>[
-                  const Text('Lista',
+                  const Text('Novo Documento',
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                   TextFormField(
                     controller: _list,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), label: Text('')),
-                  ),
-                  TextFormField(
-                    controller: _listOne,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), label: Text('')),
-                  ),
-                  TextFormField(
-                    controller: _listTwo,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), label: Text('')),
-                  ),
-                  TextFormField(
-                    controller: _listThree,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), label: Text('')),
+                    decoration:
+                        const InputDecoration(label: Text('Protocolo ou CT-E')),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FloatingActionButton(
                           backgroundColor: const Color(0xFFF2796B),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/add_document');
-                          },
-                          child: const Icon(Icons.add)),
+                          onPressed: () {},
+                          child: const Text('Enviar')),
                       const SizedBox(
                           child: Padding(padding: EdgeInsets.all(70.0)),
-                          width: 10),
+                          width: 70),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: Color(0xFFF2796B)),
+                              primary: const Color(0xFFF2796B)),
                           onPressed: () {
                             Navigator.pop(context);
                           },
