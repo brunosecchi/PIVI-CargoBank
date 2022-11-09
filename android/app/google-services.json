@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "169271304140",
+    "project_id": "cbank-dd3d6",
+    "storage_bucket": "cbank-dd3d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169271304140:android:10fd9109d0a053fc4dc769",
+        "android_client_info": {
+          "package_name": "com.example.pii6"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169271304140-n2e8unlh598bn38ign9hupre1qkokkaf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd03y8aTbPeHXac7J8g5i4BFJCUAt2Akg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169271304140-n2e8unlh598bn38ign9hupre1qkokkaf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

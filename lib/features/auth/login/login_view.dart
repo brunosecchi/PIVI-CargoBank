@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
@@ -11,6 +12,9 @@ class _LoginViewState extends State<LoginView> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   final TextEditingController _credentialController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  ///final _firebaseAuth = FirebaseAuth.instance;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,7 @@ class _LoginViewState extends State<LoginView> {
           // margin: EdgeInsets.only(ad)
           child: Form(
             child: Padding(
-              padding: EdgeInsets.all(75.5),
+              padding: const EdgeInsets.all(75.5),
               key: _formkey,
               child: Column( 
                 
@@ -38,7 +42,7 @@ class _LoginViewState extends State<LoginView> {
                         border: OutlineInputBorder(),
                         label: Text('CPF ou CNPJ')),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 40,
                     child: Padding(
                       padding: EdgeInsets.all(5.0)),
@@ -105,6 +109,12 @@ class _LoginViewState extends State<LoginView> {
       ),
     );
   }
+  }
+
+
+
+
+
 
   AppBar _appBar(Size size) {
     return AppBar(
@@ -115,4 +125,4 @@ class _LoginViewState extends State<LoginView> {
       backgroundColor: const Color(0xFFF2796B),
     );
   }
-}
+
