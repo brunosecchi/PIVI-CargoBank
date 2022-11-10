@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddDocument extends StatefulWidget {
   const AddDocument({Key? key}) : super(key: key);
@@ -10,6 +11,8 @@ class AddDocument extends StatefulWidget {
 class _AddDocumentState extends State<AddDocument> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   final TextEditingController _list = TextEditingController();
+  final ImagePicker _picker = ImagePicker();
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +40,11 @@ class _AddDocumentState extends State<AddDocument> {
                     children: [
                       FloatingActionButton(
                           backgroundColor: const Color(0xFFF2796B),
-                          onPressed: () {},
+                          onPressed: () async {
+                            final XFile? photo = await _picker.pickImage(source: ImageSource.gallery);
+                            print(photo?.path??"null");
+                            print(photo?.path??"null");
+                          },
                           child: const Text('Enviar')),
                       const SizedBox(
                           child: Padding(padding: EdgeInsets.all(70.0)),

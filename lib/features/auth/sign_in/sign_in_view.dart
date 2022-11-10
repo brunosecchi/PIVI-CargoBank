@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -37,15 +38,25 @@ class _SignInViewState extends State<SignInView> {
           "password": password,
         }),
       );
+      Navigator.pop(context);
     } catch (error) {
       throw error;
     }
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
+  Future<void> register(String email, String password) {
+    return FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    )
+        .then((UserCredential value) {
+      print(value.user.toString());
+      writeData();
+    }).catchError(
+      (error) => print(error.toString()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,15 +71,15 @@ class _SignInViewState extends State<SignInView> {
               padding: EdgeInsets.all(30.30),
               child: Column(
                 children: <Widget>[
-                  // const Text('Registro',
-                  //     style:
-                  //        TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                  const Text('Registro',
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                   const SizedBox(
                     width: 40,
                     child: Padding(padding: EdgeInsets.all(5.0)),
                   ),
                   TextFormField(
-                    //controller: _credentialName,
+                    controller: _credentialName,
                     onSaved: (value) {
                       name = value!;
                     },
@@ -81,7 +92,7 @@ class _SignInViewState extends State<SignInView> {
                     child: Padding(padding: EdgeInsets.all(5.0)),
                   ),
                   TextFormField(
-                    //controller: _credentialController,
+                    controller: _credentialController,
                     onSaved: (value) {
                       document = value!;
                     },
@@ -94,7 +105,7 @@ class _SignInViewState extends State<SignInView> {
                     child: Padding(padding: EdgeInsets.all(5.0)),
                   ),
                   TextFormField(
-                    //controller: _credentialMail,
+                    controller: _credentialMail,
                     onSaved: (value) {
                       email = value!;
                     },
@@ -106,7 +117,7 @@ class _SignInViewState extends State<SignInView> {
                     child: Padding(padding: EdgeInsets.all(5.0)),
                   ),
                   TextFormField(
-                    //controller: _credentialPhone,
+                    controller: _credentialPhone,
                     onSaved: (value) {
                       phone = value!;
                     },
@@ -118,7 +129,7 @@ class _SignInViewState extends State<SignInView> {
                     child: Padding(padding: EdgeInsets.all(5.0)),
                   ),
                   TextFormField(
-                    //controller: _passwordController,
+                    controller: _passwordController,
                     onSaved: (value) {
                       password = value!;
                     },
@@ -130,7 +141,7 @@ class _SignInViewState extends State<SignInView> {
                     child: Padding(padding: EdgeInsets.all(5.0)),
                   ),
                   TextFormField(
-                    //controller: _passwordConfirm,
+                    controller: _passwordConfirm,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         label: Text('Confirme sua Senha')),
@@ -141,11 +152,16 @@ class _SignInViewState extends State<SignInView> {
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               primary: const Color(0xFFF2796B)),
-                          onPressed: writeData,
+                          onPressed: () async {
+                            await register(
+                              _credentialMail.text.trim(),
+                              _passwordController.text.trim(),
+                            );
+                          },
                           child: const Text('Cadastrar')),
                       const SizedBox(
-                          child: Padding(padding: EdgeInsets.all(40.0)),
-                          width: 10),
+                          width: 10,
+                          child: Padding(padding: EdgeInsets.all(40.0))),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               primary: const Color(0xFFF2796B)),

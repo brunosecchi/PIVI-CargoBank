@@ -16,6 +16,24 @@ class _LoginViewState extends State<LoginView> {
 
 
 
+  Future<bool> login(
+      String email,
+      String password,
+      ) {
+    return FirebaseAuth.instance
+        .signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    )
+        .then(
+          (UserCredential value) => Future<bool>.value(true),
+    )
+
+        .catchError(
+          (error) => Future<bool>.value(false),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -40,7 +58,7 @@ class _LoginViewState extends State<LoginView> {
                     decoration: const InputDecoration(
                      
                         border: OutlineInputBorder(),
-                        label: Text('CPF ou CNPJ')),
+                        label: Text(' Email')),
                   ),
                   const SizedBox(
                     width: 40,
@@ -59,8 +77,11 @@ class _LoginViewState extends State<LoginView> {
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               primary: const Color(0xFFF2796B)),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/list');
+                          onPressed: () async {
+                            bool result = await login(_credentialController.text.trim(), _passwordController.text.trim());
+                           if(result) {print("result = $result");
+                             Navigator.pushNamed(context, '/add_document');
+                           }
                           },
                           child: const Text('Entrar')),
                     ),
