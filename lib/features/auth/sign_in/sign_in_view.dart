@@ -151,6 +151,8 @@ class _SignInViewState extends State<SignInView> {
                     children: [
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
+                              minimumSize: Size(100,40),
+                              maximumSize: Size(100,40),
                               primary: const Color(0xFFF2796B)),
                           onPressed: () async {
                             await register(
@@ -164,6 +166,8 @@ class _SignInViewState extends State<SignInView> {
                           child: Padding(padding: EdgeInsets.all(40.0))),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
+                              minimumSize: Size(100,40),
+                              maximumSize: Size(100,40),
                               primary: const Color(0xFFF2796B)),
                           onPressed: () {
                             Navigator.pop(context);

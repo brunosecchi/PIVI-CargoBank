@@ -56,7 +56,6 @@ class _LoginViewState extends State<LoginView> {
                     
                     controller: _credentialController,
                     decoration: const InputDecoration(
-                     
                         border: OutlineInputBorder(),
                         label: Text(' Email')),
                   ),
@@ -80,7 +79,7 @@ class _LoginViewState extends State<LoginView> {
                           onPressed: () async {
                             bool result = await login(_credentialController.text.trim(), _passwordController.text.trim());
                            if(result) {print("result = $result");
-                             Navigator.pushNamed(context, '/add_document');
+                             Navigator.pushNamed(context, '/list');
                            }
                           },
                           child: const Text('Entrar')),

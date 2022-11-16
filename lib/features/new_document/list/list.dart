@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class List extends StatefulWidget {
@@ -14,6 +16,26 @@ class _ListState extends State<List> {
   final TextEditingController _listTwo = TextEditingController();
   final TextEditingController _listThree = TextEditingController();
 
+
+  // @override
+  // void initState() {
+  //   super.initState(
+  //   );
+  //   xdocument();
+  // }
+
+  // Future<void> xdocument() async {
+  //   final String? uid = FirebaseAuth.instance.currentUser?.uid;
+  //   if (uid != null) {
+  //     Map<String, dynamic> map = {
+  //       "document": document,
+  //     };
+  //     FirebaseDatabase feb = FirebaseDatabase.instance;
+  //     final DatabaseReference databaseReference =
+  //     FirebaseDatabase.instance.ref().child('document').child(uid);
+  //     databaseReference.set(map);
+  //   }
+  // }
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -84,6 +106,8 @@ class _ListState extends State<List> {
                           width: 10),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
+                              minimumSize: Size(100, 40),
+                              maximumSize: Size(100, 40),
                               primary: Color(0xFFF2796B)),
                           onPressed: () {
                             Navigator.pop(context);
