@@ -1,10 +1,14 @@
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+
+
+
 
 class List extends StatefulWidget {
   const List({Key? key}) : super(key: key);
-
   @override
   State<List> createState() => _ListState();
 }
@@ -16,28 +20,18 @@ class _ListState extends State<List> {
   final TextEditingController _listTwo = TextEditingController();
   final TextEditingController _listThree = TextEditingController();
 
+  Future<void> makePostRequest() async {
+    final url = Uri.parse('https://hml.ciot.gratis/api/v2/operacao/listar');
+    final headers = {"Content-type": "application/json"};
+    final json = '{"Token": "73eeaaf7c6f8423aa5348d65d5bae815","ColunaFiltro": "Protocolo","ColunaConsulta": "2322797115761832397"}';
+    final response = await post(url, headers: headers, body: json);
+    print('Status code: ${response.statusCode}');
+    print('Body: ${response.body}');
+  }
 
-  // @override
-  // void initState() {
-  //   super.initState(
-  //   );
-  //   xdocument();
-  // }
-
-  // Future<void> xdocument() async {
-  //   final String? uid = FirebaseAuth.instance.currentUser?.uid;
-  //   if (uid != null) {
-  //     Map<String, dynamic> map = {
-  //       "document": document,
-  //     };
-  //     FirebaseDatabase feb = FirebaseDatabase.instance;
-  //     final DatabaseReference databaseReference =
-  //     FirebaseDatabase.instance.ref().child('document').child(uid);
-  //     databaseReference.set(map);
-  //   }
-  // }
   @override
   Widget build(BuildContext context) {
+    makePostRequest();
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: _appBar(size),

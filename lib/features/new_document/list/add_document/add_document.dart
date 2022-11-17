@@ -44,8 +44,8 @@ class _AddDocumentState extends State<AddDocument> {
         "document": document,
       };
       FirebaseDatabase feb = FirebaseDatabase.instance;
-      final DatabaseReference databaseReference =
-          FirebaseDatabase.instance.ref().child('document').child(uid);
+      DatabaseReference databaseReference =
+          FirebaseDatabase.instance.ref().child('document').child(uid + document);
       databaseReference.set(map);
     }
   }
