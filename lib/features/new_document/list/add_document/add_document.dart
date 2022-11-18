@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:http/http.dart' as http;
@@ -20,6 +21,25 @@ class _AddDocumentState extends State<AddDocument> {
   late String document;
   bool showimage = false;
   XFile? photo;
+  String consulta = "";
+
+  Future<void> makePostRequest() async {
+    final url = Uri.parse('https://hml.ciot.gratis/api/v2/operacao/listar');
+    final headers = {"Content-type": "application/json"};
+    print (consulta);
+    final json = '{"Token": "73eeaaf7c6f8423aa5348d65d5bae815","ColunaFiltro": "Protocolo","ColunaConsulta": "${consulta}"}';
+    final response = await post(url, headers: headers, body: json);
+    print('Status code: ${response.statusCode}');
+    print('Body: ${response.body}');
+    Map result = jsonDecode(response.body);
+    print (result['Sucesso']);
+    bool sucesso = result['Sucesso'];
+    if(sucesso == true){
+    print("Aprovado");
+    } else {
+      print ("Rejeitado");
+    }
+  }
 
   void writeData() async {
     _formDocument.currentState?.save();
@@ -111,6 +131,10 @@ class _AddDocumentState extends State<AddDocument> {
                                   primary: const Color(0xFFF2796B)),
                               onPressed: () async {
                                 await xdocument(_list.text.trim());
+                                setState(() {
+                                  consulta = _list.text;
+                                });
+                                makePostRequest();
                                 Navigator.pop(context);
                               },
                               child: const Text('Enviar')),

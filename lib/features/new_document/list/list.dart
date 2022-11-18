@@ -20,18 +20,18 @@ class _ListState extends State<List> {
   final TextEditingController _listTwo = TextEditingController();
   final TextEditingController _listThree = TextEditingController();
 
-  Future<void> makePostRequest() async {
-    final url = Uri.parse('https://hml.ciot.gratis/api/v2/operacao/listar');
-    final headers = {"Content-type": "application/json"};
-    final json = '{"Token": "73eeaaf7c6f8423aa5348d65d5bae815","ColunaFiltro": "Protocolo","ColunaConsulta": "2322797115761832397"}';
-    final response = await post(url, headers: headers, body: json);
-    print('Status code: ${response.statusCode}');
-    print('Body: ${response.body}');
-  }
+  // Future<void> makePostRequest() async {
+  //   final url = Uri.parse('https://hml.ciot.gratis/api/v2/operacao/listar');
+  //   final headers = {"Content-type": "application/json"};
+  //   final json = '{"Token": "73eeaaf7c6f8423aa5348d65d5bae815","ColunaFiltro": "Protocolo","ColunaConsulta": ${consulta}';
+  //   final response = await post(url, headers: headers, body: json);
+  //   print('Status code: ${response.statusCode}');
+  //   print('Body: ${response.body}');
+  // }
 
   @override
   Widget build(BuildContext context) {
-    makePostRequest();
+    // makePostRequest();
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: _appBar(size),
