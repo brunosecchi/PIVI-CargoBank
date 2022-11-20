@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,8 @@ import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:http/http.dart' as http;
+
+import '../../model/ciot_model.dart';
 
 class AddDocument extends StatefulWidget {
   const AddDocument({Key? key}) : super(key: key);
@@ -23,22 +26,59 @@ class _AddDocumentState extends State<AddDocument> {
   XFile? photo;
   String consulta = "";
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
+
   Future<void> makePostRequest() async {
     final url = Uri.parse('https://hml.ciot.gratis/api/v2/operacao/listar');
     final headers = {"Content-type": "application/json"};
-    print (consulta);
-    final json = '{"Token": "73eeaaf7c6f8423aa5348d65d5bae815","ColunaFiltro": "Protocolo","ColunaConsulta": "${consulta}"}';
+    final json =
+        '{"Token": "73eeaaf7c6f8423aa5348d65d5bae815","ColunaFiltro": "Protocolo","ColunaConsulta": "${consulta}"}';
     final response = await post(url, headers: headers, body: json);
-    print('Status code: ${response.statusCode}');
-    print('Body: ${response.body}');
+    log('//Body: ${response.body}');
     Map result = jsonDecode(response.body);
-    print (result['Sucesso']);
     bool sucesso = result['Sucesso'];
-    if(sucesso == true){
-    print("Aprovado");
+    if (sucesso == true) {
+      print("Aprovado");
+      Ciotsresult resultXX = Ciotsresult.fromJson(jsonDecode(response.body));
+      // resultXX.
+      saveData(
+        ciot: consulta,
+        success: true,
+        data: "${response.body}",
+      );
     } else {
-      print ("Rejeitado");
+      print("Rejeitado");
+      saveData(
+        ciot: consulta,
+        success: false,
+        data: "${response.body}",
+      );
     }
+  }
+
+  void saveData({
+    required String ciot,
+    required bool success,
+    required String data,
+  }) {
+    String? uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) throw Exception("uidNull");
+    FirebaseDatabase db = FirebaseDatabase.instance;
+    DatabaseReference ref = db
+        .ref("document")
+        .child(uid)
+        .child("ciot")
+        .child(DateTime.now().millisecondsSinceEpoch.toString());
+    Map<String, String> map = <String, String>{
+      "ciot": ciot,
+      "success": success.toString(),
+      "data": data,
+    };
+    ref.set(map);
   }
 
   void writeData() async {
@@ -54,19 +94,6 @@ class _AddDocumentState extends State<AddDocument> {
       Navigator.pop(context);
     } catch (error) {
       throw error;
-    }
-  }
-
-  Future<void> xdocument(String document) async {
-    final String? uid = FirebaseAuth.instance.currentUser?.uid;
-    if (uid != null) {
-      Map<String, dynamic> map = {
-        "document": document,
-      };
-      FirebaseDatabase feb = FirebaseDatabase.instance;
-      DatabaseReference databaseReference =
-          FirebaseDatabase.instance.ref().child('document').child(uid + document);
-      databaseReference.set(map);
     }
   }
 
@@ -130,7 +157,6 @@ class _AddDocumentState extends State<AddDocument> {
                                   maximumSize: Size(100, 40),
                                   primary: const Color(0xFFF2796B)),
                               onPressed: () async {
-                                await xdocument(_list.text.trim());
                                 setState(() {
                                   consulta = _list.text;
                                 });

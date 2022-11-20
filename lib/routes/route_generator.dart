@@ -30,7 +30,7 @@ class RouteGenerator {
       case '/list':
         {
           return doNavigation(
-            page: List(),
+            page: ListFromDb(),
           );
         }
       case '/add_document':

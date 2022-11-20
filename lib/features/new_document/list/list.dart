@@ -1,24 +1,27 @@
-import 'dart:io';
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
+import 'package:pii6/features/new_document/model/list_item_model.dart';
 
+class ListFromDb extends StatefulWidget {
+  const ListFromDb({Key? key}) : super(key: key);
 
-
-class List extends StatefulWidget {
-  const List({Key? key}) : super(key: key);
   @override
-  State<List> createState() => _ListState();
+  State<ListFromDb> createState() => _ListFromDbState();
 }
 
-class _ListState extends State<List> {
+class _ListFromDbState extends State<ListFromDb> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   final TextEditingController _list = TextEditingController();
   final TextEditingController _listOne = TextEditingController();
   final TextEditingController _listTwo = TextEditingController();
   final TextEditingController _listThree = TextEditingController();
+
+  final ListModel _model = ListModel();
 
   // Future<void> makePostRequest() async {
   //   final url = Uri.parse('https://hml.ciot.gratis/api/v2/operacao/listar');
@@ -28,6 +31,54 @@ class _ListState extends State<List> {
   //   print('Status code: ${response.statusCode}');
   //   print('Body: ${response.body}');
   // }
+
+  @override
+  void initState() {
+    super.initState();
+    loadList();
+  }
+
+  void loadList() {
+    String? uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) throw Exception("uidNull");
+    FirebaseDatabase db = FirebaseDatabase.instance;
+
+    DatabaseReference ref = db.ref("document").child(uid).child("ciot");
+
+    ref.onValue.listen(
+      (event) {
+        List<FirebaseItemModel> _aux =
+            List<FirebaseItemModel>.empty(growable: true);
+
+        for (var element in event.snapshot.children) {
+          print("child here");
+          //print(element.key);
+          //print(element.value);
+          final Map<dynamic, dynamic> data =
+              element.value as Map<dynamic, dynamic>;
+
+          _aux.add(
+            FirebaseItemModel(
+              element.key,
+              ItemFirebase(
+                ciot: data["ciot"],
+                data: data["data"],
+                success: data["success"] == "true" ? true : false,
+              ),
+            ),
+          );
+
+          updateList(_aux);
+        }
+      },
+    );
+  }
+
+  void updateList(List<FirebaseItemModel> aux) {
+    setState(() {
+      _model.firebaseItemModel = aux;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,43 +99,26 @@ class _ListState extends State<List> {
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                   const SizedBox(
                     width: 40,
-                    child: Padding(
-                      padding: EdgeInsets.all(5.0)),
+                    child: Padding(padding: EdgeInsets.all(5.0)),
                   ),
-                  TextFormField(
-                    controller: _list,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), label: Text('')),
-                  ),
-                  const SizedBox(
-                    width: 40,
-                    child: Padding(
-                      padding: EdgeInsets.all(5.0)),
-                  ),
-                  TextFormField(
-                    controller: _listOne,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), label: Text('')),
-                  ),
-                  const SizedBox(
-                    width: 40,
-                    child: Padding(
-                      padding: EdgeInsets.all(5.0)),
-                  ),
-                  TextFormField(
-                    controller: _listTwo,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), label: Text('')),
-                  ),
-                  const SizedBox(
-                    width: 40,
-                    child: Padding(
-                      padding: EdgeInsets.all(5.0)),
-                  ),
-                  TextFormField(
-                    controller: _listThree,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), label: Text('')),
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.35,
+                    child: _model.firebaseItemModel != null
+                        ? ListView.builder(
+                            itemCount: _model.firebaseItemModel?.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                height: 50,
+                                width: double.infinity,
+                                child: Text(_model.firebaseItemModel?[index]
+                                        .itemFirebase.ciot ??
+                                    'Erro ao carregar dados'),
+                              );
+                            },
+                          )
+                        : const Center(
+                            child: Text("Nenhuma info"),
+                          ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -104,7 +138,8 @@ class _ListState extends State<List> {
                               maximumSize: Size(100, 40),
                               primary: Color(0xFFF2796B)),
                           onPressed: () {
-                            Navigator.pop(context);
+                            loadList();
+                            // Navigator.pop(context);
                           },
                           child: const Text('Cancelar')),
                     ],
