@@ -10,8 +10,8 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-  final TextEditingController _credentialController = TextEditingController(text: "brn@brn.com");
-  final TextEditingController _passwordController = TextEditingController(text: "112233");
+  final TextEditingController _credentialController = TextEditingController(text: "");
+  final TextEditingController _passwordController = TextEditingController(text: "");
   ///final _firebaseAuth = FirebaseAuth.instance;
 
 

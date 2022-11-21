@@ -51,9 +51,6 @@ class _ListFromDbState extends State<ListFromDb> {
             List<FirebaseItemModel>.empty(growable: true);
 
         for (var element in event.snapshot.children) {
-          print("child here");
-          //print(element.key);
-          //print(element.value);
           final Map<dynamic, dynamic> data =
               element.value as Map<dynamic, dynamic>;
 
@@ -82,7 +79,6 @@ class _ListFromDbState extends State<ListFromDb> {
 
   @override
   Widget build(BuildContext context) {
-    // makePostRequest();
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: _appBar(size),
@@ -107,13 +103,17 @@ class _ListFromDbState extends State<ListFromDb> {
                         ? ListView.builder(
                             itemCount: _model.firebaseItemModel?.length,
                             itemBuilder: (context, index) {
-                              return Container(
-                                height: 50,
-                                width: double.infinity,
-                                child: Text(_model.firebaseItemModel?[index]
-                                        .itemFirebase.ciot ??
-                                    'Erro ao carregar dados'),
-                              );
+                              final auxIndex = index+1;
+                              return ListTile(
+                                leading: Text("$auxIndex",),
+                                  title: Text(_model.firebaseItemModel?[index]
+                                          .itemFirebase.ciot ??
+                                      'Erro ao carregar dados'),
+                                  subtitle: _model.firebaseItemModel?[index]
+                                              .itemFirebase.success ??
+                                          false
+                                      ? const Text('Aceito',style: TextStyle(color: Colors.green),)
+                                      : const Text('Rejeitado, consulte a administração.',style: TextStyle(color: Colors.red)));
                             },
                           )
                         : const Center(
@@ -139,7 +139,7 @@ class _ListFromDbState extends State<ListFromDb> {
                               primary: Color(0xFFF2796B)),
                           onPressed: () {
                             loadList();
-                            // Navigator.pop(context);
+                            Navigator.pop(context);
                           },
                           child: const Text('Cancelar')),
                     ],

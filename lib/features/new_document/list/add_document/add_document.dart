@@ -43,8 +43,6 @@ class _AddDocumentState extends State<AddDocument> {
     bool sucesso = result['Sucesso'];
     if (sucesso == true) {
       print("Aprovado");
-      Ciotsresult resultXX = Ciotsresult.fromJson(jsonDecode(response.body));
-      // resultXX.
       saveData(
         ciot: consulta,
         success: true,
